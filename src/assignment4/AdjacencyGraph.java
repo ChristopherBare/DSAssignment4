@@ -60,7 +60,10 @@ class AdjacencyGraph extends Graph {
     float density() throws IllegalStateForMatrixException {
         return 0;
     }
-
+    /**
+     * I don't know if this is right? THere wasn't a print method there.
+     * 
+     */
     void print() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
