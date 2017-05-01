@@ -5,6 +5,7 @@
  */
 package assignment4;
 
+import DataStructures.ElementNotFoundException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -47,7 +48,7 @@ public class AdjacencyGraphTest {
      * Test of addEdge method, of class AdjacencyGraph.
      */
     @Test
-    public void testAddEdge() {
+    public void testAddEdge() throws ElementNotFoundException {
         System.out.println("addEdge");
         String fromNode = "";
         String toNode = "";
