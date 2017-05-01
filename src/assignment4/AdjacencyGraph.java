@@ -7,10 +7,10 @@ import java.util.ArrayList;
  * @version 1.0
  * @author cbare3
  */
-class AdjacencyGraph<T> extends Graph {
+class AdjacencyGraph extends Graph {
 
     private ArrayList<String> nodes = new ArrayList<>();
-    private int[][] Matrix;
+    private int[][] matrix;
     private int size = 10;
 
     @Override
@@ -26,19 +26,20 @@ class AdjacencyGraph<T> extends Graph {
     }
 
     @Override
-    void addEdge(String fromNode, String toNode, int weight){
-        if (Matrix == null) {
+    void addEdge(String fromNode, String toNode, int weight) {
+        if (matrix == null) {
             size = nodes.size();
             createAdjacencyMatrix();
         }
 
         int startIndex = nodes.indexOf(toNode);
         int endIndex = nodes.indexOf(fromNode);
-        Matrix[startIndex][endIndex] = weight;
+        matrix[startIndex][endIndex] = weight;
 
     }
     @Override
-    int getNumberOfEdges() throws IllegalStateForMatrixException {
+    int getNumberOfEdges() 
+            throws IllegalStateForMatrixException {
         return 0;
     }
     
@@ -50,7 +51,8 @@ class AdjacencyGraph<T> extends Graph {
     
 
     @Override
-    String getHighestDegreeNode() throws ElementNotFoundException, IllegalStateForMatrixException {
+    String getHighestDegreeNode() 
+            throws ElementNotFoundException, IllegalStateForMatrixException {
         return null;
     }
 
@@ -81,14 +83,14 @@ class AdjacencyGraph<T> extends Graph {
         return 0;
     }
     /**
-     * I don't know if this is right? There wasn't a print method there.
+     * There wasn't a print method there.
      * NetBeans made me do it.
      * 
      */
     void print() {
-        for (int[] Matrix1 : Matrix) {
-            for (int column = 0; column < Matrix1.length; column++) {
-                System.out.print(Matrix1[column] + " ");
+        for (int[] matrix1 : matrix) {
+            for (int column = 0; column < matrix1.length; column++) {
+                System.out.print(matrix1[column] + " ");
             }
             System.out.println();
         }
