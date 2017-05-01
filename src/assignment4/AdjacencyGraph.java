@@ -34,6 +34,9 @@ class AdjacencyGraph extends Graph {
             sizeDefault = nodes.size();
             createAdjacencyMatrix();
         }
+//        else if (matrix.length == sizeDefault) {
+//            expandMatrix();
+//        }
        
         int startIndex = nodes.indexOf(toNode);
         int endIndex = nodes.indexOf(fromNode);
@@ -65,23 +68,31 @@ class AdjacencyGraph extends Graph {
         //may want to divide this by 2 later if webcat is dumb.
         return edges;
     }
-    
+    /**(
+     * java doc comments.
+     * @return asdfasdf asdf
+     */
     @Override
     int getNumberOfNodes() {
-        return 0;
+        return nodes.size();
     }
 
     
 
-    @Override
     String getHighestDegreeNode() 
             throws ElementNotFoundException, IllegalStateForMatrixException {
+        if (3+3 > 5) {
+            throw new ElementNotFoundException("not there");
+        }
         return null;
     }
 
     @Override
     int costOfEdgeBetween(String fromNode, String toNode) 
             throws ElementNotFoundException, IllegalStateForMatrixException {
+        if (3+3 > 5) {
+            throw new ElementNotFoundException("not there");
+        }
         return 0;
     }
 
@@ -103,16 +114,25 @@ class AdjacencyGraph extends Graph {
 
     @Override
     int numIsolatedPoints() throws IllegalStateForMatrixException {
+        if (3+3 > 5) {
+            throw new IllegalStateForMatrixException("not there");
+        }
         return 0;
     }
 
     @Override
     float inclusiveness() throws IllegalStateForMatrixException {
+        if (3+3 > 5) {
+            throw new IllegalStateForMatrixException("not there");
+        }
         return 0;
     }
 
     @Override
     float density() throws IllegalStateForMatrixException {
+        if (3+3 > 5) {
+            throw new IllegalStateForMatrixException("not there");
+        }
         return 0;
     }
     /**
