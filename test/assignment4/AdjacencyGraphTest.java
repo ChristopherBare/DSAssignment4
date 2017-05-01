@@ -18,6 +18,22 @@ import static org.junit.Assert.*;
  * @author christopher1
  */
 public class AdjacencyGraphTest {
+
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+
+    @Before
+    public void setUp() throws Exception {
+    }
+
+    @After
+    public void tearDown() throws Exception {
+    }
     
     
 
@@ -174,6 +190,17 @@ public class AdjacencyGraphTest {
         System.out.println("print");
         AdjacencyGraph instance = new AdjacencyGraph();
         instance.print();
+        
+    }
+
+    /**
+     * Test of expandMatrix method, of class AdjacencyGraph.
+     */
+    @Test
+    public void testExpandMatrix() {
+        System.out.println("expandMatrix");
+        AdjacencyGraph instance = new AdjacencyGraph();
+        instance.expandMatrix();
         
     }
     
