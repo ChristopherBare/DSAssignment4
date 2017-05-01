@@ -81,13 +81,14 @@ class AdjacencyGraph<T> extends Graph {
         return 0;
     }
     /**
-     * I don't know if this is right? THere wasn't a print method there.
+     * I don't know if this is right? There wasn't a print method there.
+     * NetBeans made me do it.
      * 
      */
     void print() {
-        for (int row = 0; row < Matrix.length; row++) {
-            for (int column = 0; column < Matrix[row].length; column++) {
-                System.out.print(Matrix[row][column] + " ");
+        for (int[] Matrix1 : Matrix) {
+            for (int column = 0; column < Matrix1.length; column++) {
+                System.out.print(Matrix1[column] + " ");
             }
             System.out.println();
         }
