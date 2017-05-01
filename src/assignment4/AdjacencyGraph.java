@@ -20,10 +20,6 @@ class AdjacencyGraph<T> extends Graph {
 
     @Override
     void addNode(String nodeName) {
-        //what here?
-        //did it anyway lol
-        //I gave you control of typing not presenting lol'
-        //what goes here....
         nodes.add(nodeName);
         
     
@@ -31,17 +27,16 @@ class AdjacencyGraph<T> extends Graph {
 
     @Override
     void addEdge(String fromNode, String toNode, int weight){
-        if(Matrix==null)
-        {
+        if (Matrix == null) {
             size = nodes.size();
-        createAdjacencyMatrix();
+            createAdjacencyMatrix();
+        }
+
+        int startIndex = nodes.indexOf(toNode);
+        int endIndex = nodes.indexOf(fromNode);
+        Matrix[startIndex][endIndex] = weight;
+
     }
-
-    int startIndex = nodes.indexOf(toNode);
-    int endIndex = nodes.indexOf(fromNode);
-    Matrix[startIndex][endIndex] = weight ;
-
-}
     @Override
     int getNumberOfEdges() throws IllegalStateForMatrixException {
         return 0;
@@ -90,7 +85,13 @@ class AdjacencyGraph<T> extends Graph {
      * 
      */
     void print() {
-        
+        for (int row = 0; row < Matrix.length; row++) {
+            for (int column = 0; column < Matrix[row].length; column++) {
+                System.out.print(Matrix[row][column] + " ");
+            }
+            System.out.println();
+        }
     }
+    
     
 }
