@@ -3,6 +3,9 @@ package assignment4;
 import DataStructures.ElementNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+
 
 /**
  * @version 1.0
@@ -14,6 +17,9 @@ class AdjacencyGraph extends Graph {
     private int[][] matrix;
     private int sizeDefault = 10;
     private int edges = 0;
+    private boolean[][] matrix2 = new boolean[10][10];
+    
+    
 
     @Override
     void createAdjacencyMatrix() {
@@ -55,11 +61,11 @@ class AdjacencyGraph extends Graph {
         if (matrix == null) {
             throw new IllegalStateForMatrixException("No matrix was made!");
         }
-//        int edges = 0;
+//        int edgesOfEdgyness = 0;
 //        for (int row = 0; row < matrix.length; row++) {
 //            for (int column = 0; column < matrix.length; column++) {
 //                if (column < nodes.size() && matrix[row][column] != 0) {
-//                    edges++;
+//                    edgesOfEdgyness++;
 //                }
 //            }
 
@@ -128,20 +134,35 @@ class AdjacencyGraph extends Graph {
     @Override
     boolean hasPathBetween(String fromName, String toName)
             throws ElementNotFoundException, IllegalStateForMatrixException {
+        if (matrix == null) {
+            throw new IllegalStateForMatrixException("no matrix");
+        }
         int startIndex = nodes.indexOf(toName);
         int endIndex = nodes.indexOf(fromName);
         if (startIndex == -1 || endIndex == -1) {
             throw new ElementNotFoundException("No element.");
         }
-        else if (matrix[startIndex][endIndex] == -1) {
+        //for indirect connected
+        ArrayList<String> bfs = breadthFirstTraversal(fromName);
+        for (int i = 0; i < bfs.size(); i++) {
+            if (bfs.get(i) == toName) {
+                return true;
+            } 
+            
+        }
+        //for if it doesn't have a path
+        if (matrix[startIndex][endIndex] == -1) {
             return false;
         }
+        
+        
+        
+        
         else {
-            return true;
+            return false;
         }
-
     }
-
+    
     @Override
     int numIsolatedPoints() throws IllegalStateForMatrixException {
         if (matrix == null) {
@@ -179,15 +200,15 @@ class AdjacencyGraph extends Graph {
 
     @Override
     float density() throws IllegalStateForMatrixException {
-        //Density is the defined as edges/(noodles*(noodles-1)/2)
+        //Density is the defined as edgesOfEdgyness/(noodles*(noodles-1)/2)
 
         if (matrix == null) {
             throw new IllegalStateForMatrixException("not there");
         }
-        float edges = getNumberOfEdges();
+        float edgesOfEdgyness = getNumberOfEdges();
         float nodidlies = getNumberOfNodes();
 
-        return edges / (nodidlies * (nodidlies - 1) / 2);
+        return edgesOfEdgyness / (nodidlies * (nodidlies - 1) / 2);
     }
 
     /**
@@ -223,6 +244,63 @@ class AdjacencyGraph extends Graph {
      */
     void expandMatrix() {
         matrix = Arrays.copyOf(matrix, matrix.length * 2);
+    }
+    /**
+     * Returns an ArrayList of String vertices arrived at through breadth-first.
+     * traversal starting at specified vertex
+     *
+     * @param startVertex asdfasdf
+     * @return array of vertices from breadth-first traversal
+     */
+    public ArrayList<String> breadthFirstTraversal(String startVertex) {
+        for (int i = 0; i < nodes.size() - 1; i++) {
+            matrix2[nodes.size()][i] = false;
+            matrix2[i][nodes.size()] = false;
+
+        }
+        Integer x;
+        ArrayList<String> resultsList = new ArrayList<String>();
+        Queue<Integer> traversalQueue = new LinkedList<Integer>();
+        boolean[] visited = new boolean[nodes.size()];
+
+        // get index of starting vertice
+        int startIndex = nodes.indexOf(startVertex);
+        if (!indexIsValid(startIndex)) {
+            return null;
+        }
+        // initialize visited array
+        for (int i = 0; i < nodes.size(); i++) {
+            visited[i] = false;
+        }
+
+        // add first vertex to queue and mark it as visited
+        traversalQueue.add(startIndex);
+        visited[startIndex] = true;
+
+        // keep pulling items off the queue, and
+        // checking through all their adjacencies and
+        // enqueue them if they haven't been visited
+        while (!traversalQueue.isEmpty()) {
+            x = traversalQueue.poll();
+            resultsList.add(nodes.get(x.intValue()));
+            for (int i = 0; i < nodes.size(); i++) {
+                if (matrix2[x.intValue()][i] && !visited[i]) {
+                    traversalQueue.add(i);
+                    visited[i] = true;
+                }
+            }
+
+        }
+
+        return resultsList;
+    }
+/**
+ * 
+ * @param index1 asdfasdf
+ * @return asdfasdf
+ */
+    private boolean indexIsValid(int index1) {
+        return !((index1 == -1) || (index1 >= nodes.size()));
     }
 
 }
